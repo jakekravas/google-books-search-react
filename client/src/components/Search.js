@@ -27,7 +27,10 @@ const Search = () => {
           </div>
         </div>
       </form>
-      <SearchResults booksToShow={books} loading={loading}/>
+      <ul className="list-group">
+
+        <SearchResults booksToShow={books} loading={loading}/>
+      </ul>
     </div>
   )
 }
