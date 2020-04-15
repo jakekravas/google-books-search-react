@@ -1,26 +1,42 @@
 import React from 'react'
 import Spinner from "./Spinner";
+import axios from "axios";
 
 const SearchResults = (props) => {
-  console.log(props.booksToShow);
-  let whatToDisplay;
+  const saveBook = (title, authors, desc, img, link, id, e) => {
 
+    e.target.innerHTML = "Saved";
+    e.target.className = "btn btn-success align-self-center";
+
+    let newBookObj = {
+      title: title,
+      authors: authors,
+      description: desc,
+      image: img,
+      link: link
+    }
+    axios.post("/api/books", newBookObj).then((res) => {
+      console.log(res);
+    })
+  }
+
+  let display;
+  
   if (props.loading === 0){
-    whatToDisplay = <span className="d-none"></span>;
+    display = <span className="d-none"></span>; //Displays if user hasn't searched yet
   } else if (props.loading === 1) {
-    whatToDisplay = <Spinner/>;
+    display = <Spinner/>; //Displays while books are loading
   } else if (props.loading === 2) {
-
-    
-    whatToDisplay = props.booksToShow.map(book => {
+    display = props.books.map(book => { //Displays books to page
       let info = book.volumeInfo;
 
-      let shortenedDescArr = info.description.split(" "); //Converting to array
-      shortenedDescArr.length = 12; //Shortening description
-      shortenedDescArr.push("..."); //Adding 3 dots so user knows there's more to description
-      let shortenedDescription = shortenedDescArr.join(" "); //Converting back to string
-
-      return <li className="list-group-item">
+      let descArr = info.description.split(" "); //Converting to array
+      descArr.length = 12; //Shortening description
+      descArr.push("..."); //Adding 3 dots so user knows there's more to description
+      let shortenedDescription = descArr.join(" "); //Converting back to string
+      
+      return (
+      <li className="list-group-item">
         <div className="row">
           <div className="col-1">
             <img src={info.imageLinks.thumbnail} alt="book" height="100px"/>
@@ -33,15 +49,22 @@ const SearchResults = (props) => {
             </p>
           </div>
           <div className="col-2 d-flex">
-            <button className="btn btn-info align-self-center">Save book</button>
+            <button onClick={(e) => saveBook(
+              info.title,
+              info.authors[0],
+              info.description,
+              info.imageLinks.thumbnail,
+              info.infoLink,
+              book.id, e
+              )} className="btn btn-info align-self-center">Save book</button>
           </div>
         </div>
-
       </li>
+      )
     });
   }
 
-  return whatToDisplay;
+  return display;
 }
 
 export default SearchResults;

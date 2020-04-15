@@ -28,8 +28,7 @@ const Search = () => {
         </div>
       </form>
       <ul className="list-group">
-
-        <SearchResults booksToShow={books} loading={loading}/>
+        <SearchResults books={books} loading={loading}/>
       </ul>
     </div>
   )
