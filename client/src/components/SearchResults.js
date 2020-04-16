@@ -67,8 +67,8 @@ const SearchResults = (props) => {
             <button onClick={(e) => saveBook(
               info.title,
               info.authors[0],
-              info.description,
-              info.imageLinks.thumbnail,
+              shortenedDescription,
+              cover,
               info.infoLink,
               book.id, e
               )} className="btn btn-info align-self-center">Save book</button>

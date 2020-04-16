@@ -35,15 +35,6 @@ const Saved = () => {
       display = <h5 className="text-center">No books to display</h5>
     } else {
         display = books.map(book => { //Displays when loading has finished
-          let shortenedDescription;
-    
-          // Ensuring our site doesn't error out if any of the results have no description
-          if (book.description){
-            let descArr = book.description.split(" "); //Converting to array
-            descArr.length = 12; //Shortening description
-            descArr.push("..."); //Adding 3 dots so user knows there's more to description
-            shortenedDescription = descArr.join(" "); //Converting back to string
-          }
           
           return (
           <li className="list-group-item">
@@ -55,7 +46,7 @@ const Saved = () => {
                 <h5>{book.title}</h5>
                 <p className="text-muted">By {book.authors}</p>
                 <p>
-                  {shortenedDescription} <a href={book.link} target="_blank">More info</a>
+                  {book.description} <a href={book.link} target="_blank">More info</a>
                 </p>
               </div>
               <div className="col-2 d-flex">

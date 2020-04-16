@@ -21,7 +21,7 @@ const Search = () => {
       <h3>Book Search</h3>
       <form>
         <div className="input-group">
-          <input type="text" placeholder="Book" className="form-control" id="search"/>
+          <input type="text" placeholder="Book" autoComplete="off" className="form-control" id="search"/>
           <div className="input-group-append">
             <button className="btn btn-outline-secondary" onClick={searchForBooks}>Search</button>
           </div>
