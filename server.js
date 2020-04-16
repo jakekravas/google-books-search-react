@@ -17,6 +17,10 @@ app.use("/api/books", books);
 
 const port = process.env.PORT || 5000;
 
+if (process.env.NODE_ENV === "production"){
+  app.use(express.static("./client/build"))
+}
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 })

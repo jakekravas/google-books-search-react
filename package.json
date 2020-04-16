@@ -4,7 +4,9 @@
   "description": "Google Books Searcher built with the MERN stack",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "build": "cd client && npm run build",
+    "client-install": "cd client && npm install",
+    "heroku-postbuild": "npm run client-install && npm run build",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
