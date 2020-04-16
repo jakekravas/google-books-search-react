@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/googlebooks"
+  process.env.MONGODB_URI || "mongodb://jakekravas:greycat2@cluster0-shard-00-00-x5pli.gcp.mongodb.net:27017,cluster0-shard-00-01-x5pli.gcp.mongodb.net:27017,cluster0-shard-00-02-x5pli.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
 ).then(() => console.log("MongoDB connected"));
 
 // Use Routes
