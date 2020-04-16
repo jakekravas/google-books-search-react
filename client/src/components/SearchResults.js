@@ -1,6 +1,7 @@
 import React from 'react'
 import Spinner from "./Spinner";
 import API from "../utils/API";
+import placeholder from "./placeholder.png";
 
 const SearchResults = (props) => {
   const saveBook = (title, authors, desc, img, link, id, e) => {
@@ -33,6 +34,7 @@ const SearchResults = (props) => {
     display = props.books.map(book => { //Displays when loading has finished
       let info = book.volumeInfo;
       let shortenedDescription;
+      let cover;
 
       // Ensuring our site doesn't error out if any of the results have no description
       if (info.description){
@@ -41,12 +43,18 @@ const SearchResults = (props) => {
         descArr.push("..."); //Adding 3 dots so user knows there's more to description
         shortenedDescription = descArr.join(" "); //Converting back to string
       }
+
+      if (info.imageLinks){
+        cover = info.imageLinks.thumbnail;
+      } else {
+        cover = placeholder;
+      }
       
       return (
       <li className="list-group-item">
         <div className="row">
           <div className="col-1">
-            <img src={info.imageLinks.thumbnail} alt="book" height="90px"/>
+            <img src={cover} alt="book" height="90px"/>
           </div>
           <div className="col-9">
             <h5>{info.title}</h5>
