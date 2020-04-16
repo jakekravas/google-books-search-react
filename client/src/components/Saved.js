@@ -5,8 +5,11 @@ const Saved = () => {
   const [loading, setLoading] = useState(0);
   const [books, setBooks] = useState();
 
-  const removeBook = e => {
-
+  const removeBook = (bookId, e) => {
+    API.deleteBook(bookId);
+    // setLoading(0);
+    // displayBooks();
+    window.location.reload();
   }
 
   let display;
@@ -54,7 +57,7 @@ const Saved = () => {
             </p>
           </div>
           <div className="col-2 d-flex">
-            <button onClick={removeBook} className="btn btn-danger align-self-center">Remove book</button>
+            <button onClick={(e) => removeBook(book._id, e)} className="btn btn-danger align-self-center">Remove book</button>
           </div>
         </div>
       </li>
