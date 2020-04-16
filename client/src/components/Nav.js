@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from "react-dom";
+import {Link} from "react-router-dom";
 
 const Nav = () => {
   return (
@@ -8,10 +8,10 @@ const Nav = () => {
         <div className="navbar-brand">(React) Google Book Search</div>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <a className="nav-link">Search</a>
+            <Link to={"/"} className="nav-link">Search</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link">Saved</a>
+            <Link to={"/saved"} className="nav-link">Saved</Link>
           </li>
         </ul>
       </div>

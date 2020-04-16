@@ -9,11 +9,11 @@ const Search = () => {
 
   const searchForBooks = async (e) => {
     e.preventDefault();
-    setLoading(1);
+    setLoading(1); //Signifies that loading has began
     const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${$("#search").val()}`);
     
-    setBooks(res.data.items);
-    setLoading(2);
+    setBooks(res.data.items); //Setting books to whatever the API search returns
+    setLoading(2); //Signifies that loading has finished
   }
 
   return (

@@ -1,13 +1,14 @@
 import React from 'react'
 import Spinner from "./Spinner";
-import axios from "axios";
+import API from "../utils/API";
 
 const SearchResults = (props) => {
   const saveBook = (title, authors, desc, img, link, id, e) => {
 
-    e.target.innerHTML = "Saved";
-    e.target.className = "btn btn-success align-self-center";
+    e.target.innerHTML = "Saved"; //Changing button text
+    e.target.className = "btn btn-success align-self-center"; //Changing button color
 
+    // Creating new book object
     let newBookObj = {
       title: title,
       authors: authors,
@@ -15,7 +16,9 @@ const SearchResults = (props) => {
       image: img,
       link: link
     }
-    axios.post("/api/books", newBookObj).then((res) => {
+
+    // Saving new book object to our database
+    API.saveBook(newBookObj).then((res) => {
       console.log(res);
     })
   }
@@ -27,19 +30,23 @@ const SearchResults = (props) => {
   } else if (props.loading === 1) {
     display = <Spinner/>; //Displays while books are loading
   } else if (props.loading === 2) {
-    display = props.books.map(book => { //Displays books to page
+    display = props.books.map(book => { //Displays when loading has finished
       let info = book.volumeInfo;
+      let shortenedDescription;
 
-      let descArr = info.description.split(" "); //Converting to array
-      descArr.length = 12; //Shortening description
-      descArr.push("..."); //Adding 3 dots so user knows there's more to description
-      let shortenedDescription = descArr.join(" "); //Converting back to string
+      // Ensuring our site doesn't error out if any of the results have no description
+      if (info.description){
+        let descArr = info.description.split(" "); //Converting to array
+        descArr.length = 12; //Shortening description
+        descArr.push("..."); //Adding 3 dots so user knows there's more to description
+        shortenedDescription = descArr.join(" "); //Converting back to string
+      }
       
       return (
       <li className="list-group-item">
         <div className="row">
           <div className="col-1">
-            <img src={info.imageLinks.thumbnail} alt="book" height="100px"/>
+            <img src={info.imageLinks.thumbnail} alt="book" height="90px"/>
           </div>
           <div className="col-9">
             <h5>{info.title}</h5>
