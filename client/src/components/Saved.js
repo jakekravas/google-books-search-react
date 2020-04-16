@@ -8,30 +8,28 @@ const Saved = () => {
 
   const removeBook = (bookId, e) => {
     API.deleteBook(bookId);
-    // setLoading(0);
-    // displayBooks();
     window.location.reload();
   }
 
   let display;
 
   useEffect(() => {
-    displayBooks();
+    displayBooks(); //Runs on page load
   }, [])
   
   const displayBooks = async () => {
-    setLoading(1);
+    setLoading(1); //Sets loading to current
 
     await API.getBooks().then((res) => {
       setBooks(res.data);
     })
-    setLoading(2)
+    setLoading(2) //Sets loading to done after API.getBooks() has finished
   }
-  if (loading === 0){
+  if (loading === 0){ //Before loading has started
     display = <span className="d-none"></span>
-  } else if (loading === 1){
+  } else if (loading === 1){ //During loading
     display = <Spinner/>
-  } else if (loading === 2){
+  } else if (loading === 2){ //When loading has finished
 
     if (books.length < 1){
       display = <h5 className="text-center">No books to display</h5>
