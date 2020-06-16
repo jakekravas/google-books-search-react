@@ -46,7 +46,7 @@ const Saved = () => {
                 <h5>{book.title}</h5>
                 <p className="text-muted">By {book.authors}</p>
                 <p>
-                  {book.description} <a href={book.link} target="_blank">More info</a>
+                  {book.description} <a href={book.link} rel="noopener noreferrer" target="_blank">More info</a>
                 </p>
               </div>
               <div className="col-2 d-flex">

@@ -60,7 +60,7 @@ const SearchResults = (props) => {
             <h5>{info.title}</h5>
             <p className="text-muted">By {info.authors[0]}</p>
             <p>
-              {shortenedDescription} <a href={info.infoLink} target="_blank">More info</a>
+              {shortenedDescription} <a href={info.infoLink} rel="noopener noreferrer" target="_blank">More info</a>
             </p>
           </div>
           <div className="col-2 d-flex">
